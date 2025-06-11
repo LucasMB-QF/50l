@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Calificaciones IQ/OQ/PQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            height: 120px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            max-width: 500px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder i {
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-right: 15px;
+        }
+        
+        .logo-placeholder span {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            color: #a0d2ff;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px 40px;
+            min-width: 200px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-btn i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .category-btn h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-btn p {
+            color: #c0e0ff;
+            font-size: 1rem;
+        }
+        
+        .btn-iq {
+            background: linear-gradient(135deg, rgba(106, 27, 154, 0.7), rgba(49, 27, 146, 0.7));
+        }
+        
+        .btn-oq {
+            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7), rgba(0, 77, 64, 0.7));
+        }
+        
+        .btn-pq {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.7), rgba(183, 28, 28, 0.7));
+        }
+        
+        .documents-container {
+            background: rgba(16, 22, 58, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(100, 181, 246, 0.5);
+        }
+        
+        .section-title i {
+            font-size: 28px;
+            margin-right: 15px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .document-card {
+            background: rgba(30, 40, 100, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+        }
+        
+        .document-card:hover {
+            transform: translateY(-5px);
+            background: rgba(40, 60, 150, 0.7);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(100, 181, 246, 0.4);
+        }
+        
+        .document-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #64b5f6;
+        }
+        
+        .document-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .document-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #90caf9;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-view {
+            background: linear-gradient(to right, #00c853, #009624);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-download {
+            background: linear-gradient(to right, #2979ff, #01579b);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .viewer-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .viewer-container.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .viewer-header {
+            padding: 15px 20px;
+            background: rgba(30, 30, 30, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .viewer-title {
+            font-size: 1.2rem;
+            color: #64b5f6;
+        }
+        
+        .close-viewer {
+            background: #f44336;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .viewer-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .pdf-viewer {
+            width: 90%;
+            height: 90%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.3);
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(40, 167, 69, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #90a4ae;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-placeholder">
+                <i class="fas fa-building"></i>
+                <span>Logo de la Empresa</span>
+            </div>
+            <h1>Sistema de Calificaciones</h1>
+            <p class="subtitle">Gestión documental IQ/OQ/PQ - Visualización y descarga de archivos</p>
+        </header>
+        
+        <div class="categories">
+            <div class="category-btn btn-iq" data-category="dq">
+                <i class="fas fa-file-alt"></i>
+                <h2>DQ</h2>
+                <p>Design Qualification</p>
+            </div>
+            <div class="category-btn btn-oq" data-category="oq">
+                <i class="fas fa-cogs"></i>
+                <h2>OQ</h2>
+                <p>Calificación Operativa</p>
+            </div>
+            <div class="category-btn btn-pq" data-category="pq">
+                <i class="fas fa-chart-line"></i>
+                <h2>PQ</h2>
+                <p>Calificación de Desempeño</p>
+            </div>
+        </div>
+        
+        <div class="documents-container">
+            <div class="section-title">
+                <i class="fas fa-folder-open"></i>
+                <h2 id="current-category">Seleccione una categoría</h2>
+            </div>
+            <div class="documents-grid" id="documents-grid">
+                <div class="empty-state">
+                    <p>Seleccione una categoría para ver los documentos disponibles</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Sistema de Gestión Documental &copy; 2023 | Alojado en Netlify</p>
+        </div>
+    </div>
+    
+    <div class="viewer-container" id="pdf-viewer-container">
+        <div class="viewer-header">
+            <div class="viewer-title" id="viewer-title">Documento.pdf</div>
+            <button class="close-viewer" id="close-viewer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="viewer-content">
+            <iframe class="pdf-viewer" id="pdf-viewer" src=""></iframe>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Descarga iniciada
+    </div>
+    
+    <script>
+        // Datos REALES (DQ completo, OQ/PQ pendientes)
+        const documents = {
+            dq: [
+                { 
+                    id: '1a6QQhHivaP5gq7ilhw9vMeX84eohgZFP', 
+                    name: 'ANEXO 1 DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                },
+                { 
+                    id: '1zXouxnhzhp5vWwjGbAqnJBZ0EH7ZwEXp', 
+                    name: 'ANEXO 2 DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                },
+                { 
+                    id: '1h_cotjDOXX0S6EWtvlj0qw-8pfPOrMBw', 
+                    name: 'ANEXO 3 DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                },
+                { 
+                    id: '14HWEGKkcjbe8NEs7t0p7oH0DAH5B90aH', 
+                    name: 'ANEXO 4 DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                },
+                { 
+                    id: '1exq0gmlatLVDit5CuYjpGDMAPssvE7Zt', 
+                    name: 'INFORME FINAL DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                },
+                { 
+                    id: '1szOHZtm7kXITBcTR9xN7buBiASqm4lqQ', 
+                    name: 'PROTOCOLO DQ', 
+                    type: 'pdf', 
+                    size: '-- MB', 
+                    date: '--' 
+                }
+            ],
+            oq: [], // Pendiente tus archivos OQ
+            pq: []  // Pendiente tus archivos PQ
+        };
+        
+        // Referencias DOM
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const currentCategory = document.getElementById('current-category');
+        const documentsGrid = document.getElementById('documents-grid');
+        const pdfViewerContainer = document.getElementById('pdf-viewer-container');
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const closeViewer = document.getElementById('close-viewer');
+        const viewerTitle = document.getElementById('viewer-title');
+        const notification = document.getElementById('notification');
+        
+        // Manejar clic en categorías
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                loadDocuments(category);
+                
+                // Actualizar título de categoría
+                const categoryName = button.querySelector('h2').textContent;
+                currentCategory.textContent = `Documentos de ${categoryName}`;
+            });
+        });
+        
+        // Cargar documentos de una categoría
+        function loadDocuments(category) {
+            const docs = documents[category];
+            let html = '';
+            
+            if (docs && docs.length > 0) {
+                docs.forEach(doc => {
+                    const icon = getIconForType(doc.type);
+                    
+                    html += `
+                    <div class="document-card">
+                        <div class="document-icon">${icon}</div>
+                        <h3 class="document-title">${doc.name}</h3>
+                        <div class="document-meta">
+                            <span>${doc.type.toUpperCase()}</span>
+                            <span>${doc.size}</span>
+                            <span>${doc.date}</span>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn btn-view" onclick="viewDocument('${doc.id}', '${doc.name}', '${doc.type}')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="btn btn-download" onclick="downloadDocument('${doc.id}', '${doc.name}')">
+                                <i class="fas fa-download"></i> Descargar
+                            </button>
+                        </div>
+                    </div>
+                    `;
+                });
+            } else {
+                html = '<p>No se encontraron documentos en esta categoría.</p>';
+            }
+            
+            documentsGrid.innerHTML = html;
+        }
+        
+        // Obtener icono según tipo de documento
+        function getIconForType(type) {
+            const icons = {
+                'pdf': '<i class="far fa-file-pdf"></i>',
+                'docx': '<i class="far fa-file-word"></i>',
+                'xlsx': '<i class="far fa-file-excel"></i>',
+                'pptx': '<i class="far fa-file-powerpoint"></i>'
+            };
+            
+            return icons[type] || '<i class="far fa-file"></i>';
+        }
+        
+        // Visualizar documento
+        function viewDocument(id, name, type) {
+            if (type === 'pdf') {
+                // URL de vista previa de Google Drive para PDFs
+                const url = `https://drive.google.com/file/d/${id}/preview`;
+                pdfViewer.src = url;
+                viewerTitle.textContent = name;
+                pdfViewerContainer.classList.add('active');
+            } else {
+                alert('La vista previa solo está disponible para documentos PDF. Por favor descargue el archivo para verlo.');
+            }
+        }
+        
+        // Descargar documento
+        function downloadDocument(id, name) {
+            // URL de descarga directa de Google Drive
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+            
+            // Crear enlace temporal para descarga
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.setAttribute('download', name);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Mostrar notificación
+            showNotification();
+        }
+        
+        // Mostrar notificación de descarga
+        function showNotification() {
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Cerrar visor PDF
+        closeViewer.addEventListener('click', () => {
+            pdfViewerContainer.classList.remove('active');
+            pdfViewer.src = '';
+        });
+        
+        // Cerrar visor al hacer clic fuera del contenido
+        pdfViewerContainer.addEventListener('click', (e) => {
+            if (e.target === pdfViewerContainer) {
+                pdfViewerContainer.classList.remove('active');
+                pdfViewer.src = '';
+            }
+        });
+        
+        // Inicializar con DQ
+        loadDocuments('dq');
+        currentCategory.textContent = 'Documentos de DQ';
+    </script>
+</body>
+</html>
