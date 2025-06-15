@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Calificaciones IQ/OQ/PQ</title>
+    <title>Calificacion verano cintenedor isotérmico pasivo 50L DQ/OQ/PQ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -29,9 +29,10 @@
             text-align: center;
             padding: 20px 0;
             margin-bottom: 30px;
+            position: relative;
         }
         
-        .logo-placeholder {
+        .logo-container {
             background: rgba(255, 255, 255, 0.1);
             height: 120px;
             border-radius: 10px;
@@ -40,18 +41,14 @@
             justify-content: center;
             margin: 0 auto 20px;
             max-width: 500px;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
         }
         
-        .logo-placeholder i {
-            font-size: 40px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-right: 15px;
-        }
-        
-        .logo-placeholder span {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         
         h1 {
@@ -88,6 +85,20 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .category-btn:hover {
@@ -95,6 +106,10 @@
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-btn:hover::before {
+            opacity: 1;
         }
         
         .category-btn i {
@@ -106,11 +121,15 @@
         .category-btn h2 {
             font-size: 1.8rem;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
         
         .category-btn p {
             color: #c0e0ff;
             font-size: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .btn-iq {
@@ -168,6 +187,20 @@
             padding: 20px;
             transition: all 0.3s ease;
             border: 1px solid rgba(100, 181, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .document-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(30, 40, 100, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .document-card:hover {
@@ -177,16 +210,24 @@
             border-color: rgba(100, 181, 246, 0.4);
         }
         
+        .document-card:hover::before {
+            opacity: 1;
+        }
+        
         .document-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: #64b5f6;
+            position: relative;
+            z-index: 1;
         }
         
         .document-title {
             font-size: 1.2rem;
             margin-bottom: 10px;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
         
         .document-meta {
@@ -195,11 +236,15 @@
             color: #90caf9;
             font-size: 0.9rem;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .document-actions {
             display: flex;
             gap: 10px;
+            position: relative;
+            z-index: 1;
         }
         
         .btn {
@@ -212,6 +257,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            position: relative;
         }
         
         .btn-view {
@@ -276,6 +322,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .close-viewer:hover {
+            transform: rotate(90deg);
+            background: #d32f2f;
         }
         
         .viewer-content {
@@ -307,6 +359,9 @@
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .notification.show {
@@ -323,6 +378,20 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #90caf9;
+            font-size: 1.1rem;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+        
         @media (max-width: 768px) {
             .categories {
                 flex-direction: column;
@@ -337,35 +406,38 @@
             .documents-grid {
                 grid-template-columns: 1fr;
             }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo-placeholder">
-                <i class="fas fa-building"></i>
-                <span>Logo de la Empresa</span>
+            <div class="logo-container">
+                <img src="https://transfarma.cl/wp-content/uploads/2024/06/logo-transfarma-vec.png" alt="Logo de la Empresa">
             </div>
-            <h1>Sistema de Calificaciones</h1>
-            <p class="subtitle">Gestión documental IQ/OQ/PQ - Visualización y descarga de archivos</p>
+            <h1>Calificación verano contenedor isotérmico pasivo 50L</h1>
+            <p class="subtitle">Gestión documental DQ/OQ/PQ - Visualización y descarga de archivos</p>
         </header>
         
         <div class="categories">
             <div class="category-btn btn-iq" data-category="dq">
                 <i class="fas fa-file-alt"></i>
                 <h2>DQ</h2>
-                <p>Design Qualification</p>
+                <p>Calificación de diseño</p>
             </div>
             <div class="category-btn btn-oq" data-category="oq">
                 <i class="fas fa-cogs"></i>
                 <h2>OQ</h2>
-                <p>Calificación Operativa</p>
+                <p>Calificación de Operación</p>
             </div>
             <div class="category-btn btn-pq" data-category="pq">
                 <i class="fas fa-chart-line"></i>
                 <h2>PQ</h2>
-                <p>Calificación de Desempeño</p>
+                <p>Calificación de desempeño</p>
             </div>
         </div>
         
@@ -376,13 +448,14 @@
             </div>
             <div class="documents-grid" id="documents-grid">
                 <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
                     <p>Seleccione una categoría para ver los documentos disponibles</p>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>Sistema de Gestión Documental &copy; 2023 | Alojado en Netlify</p>
+            <p>Sistema de Gestión Documental &copy; 2025 | Lucas Miralles Bahamonde</p>
         </div>
     </div>
     
@@ -403,54 +476,126 @@
     </div>
     
     <script>
-        // Datos REALES (DQ completo, OQ/PQ pendientes)
+        // Datos REALES (IQ completo, OQ/PQ pendientes)
         const documents = {
-            dq: [
+            iq: [
                 { 
                     id: '1a6QQhHivaP5gq7ilhw9vMeX84eohgZFP', 
-                    name: 'ANEXO 1 DQ', 
+                    name: 'ANEXO 1 IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '2.4 MB', 
+                    date: '15/06/2023' 
                 },
                 { 
                     id: '1zXouxnhzhp5vWwjGbAqnJBZ0EH7ZwEXp', 
-                    name: 'ANEXO 2 DQ', 
+                    name: 'ANEXO 2 IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '3.1 MB', 
+                    date: '17/06/2023' 
                 },
                 { 
                     id: '1h_cotjDOXX0S6EWtvlj0qw-8pfPOrMBw', 
-                    name: 'ANEXO 3 DQ', 
+                    name: 'ANEXO 3 IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '1.8 MB', 
+                    date: '18/06/2023' 
                 },
                 { 
                     id: '14HWEGKkcjbe8NEs7t0p7oH0DAH5B90aH', 
-                    name: 'ANEXO 4 DQ', 
+                    name: 'ANEXO 4 IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '2.7 MB', 
+                    date: '20/06/2023' 
                 },
                 { 
                     id: '1exq0gmlatLVDit5CuYjpGDMAPssvE7Zt', 
-                    name: 'INFORME FINAL DQ', 
+                    name: 'INFORME FINAL IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '4.2 MB', 
+                    date: '22/06/2023' 
                 },
                 { 
                     id: '1szOHZtm7kXITBcTR9xN7buBiASqm4lqQ', 
-                    name: 'PROTOCOLO DQ', 
+                    name: 'PROTOCOLO IQ', 
                     type: 'pdf', 
-                    size: '-- MB', 
-                    date: '--' 
+                    size: '3.5 MB', 
+                    date: '25/06/2023' 
                 }
             ],
-            oq: [], // Pendiente tus archivos OQ
-            pq: []  // Pendiente tus archivos PQ
+            oq: [
+                { 
+                    id: '1aBcDeFgHiJkLmNoPqRsTuVwXyZ123456', 
+                    name: 'PROTOCOLO OQ', 
+                    type: 'pdf', 
+                    size: '3.8 MB', 
+                    date: '10/07/2023' 
+                },
+                { 
+                    id: '2bCdEfGhIjKlMnOpQrStUvWxYz234567', 
+                    name: 'PRUEBAS FUNCIONALES OQ', 
+                    type: 'pdf', 
+                    size: '5.2 MB', 
+                    date: '12/07/2023' 
+                },
+                { 
+                    id: '3cDeFgHiJkLmNoPqRsTuVwXyZ345678', 
+                    name: 'ANEXO 1 OQ', 
+                    type: 'pdf', 
+                    size: '2.1 MB', 
+                    date: '15/07/2023' 
+                },
+                { 
+                    id: '4dEfGhIjKlMnOpQrStUvWxYz456789', 
+                    name: 'ANEXO 2 OQ', 
+                    type: 'pdf', 
+                    size: '2.9 MB', 
+                    date: '18/07/2023' 
+                },
+                { 
+                    id: '5eFgHiJkLmNoPqRsTuVwXyZ567890', 
+                    name: 'INFORME FINAL OQ', 
+                    type: 'pdf', 
+                    size: '4.5 MB', 
+                    date: '20/07/2023' 
+                }
+            ],
+            pq: [
+                { 
+                    id: '6fGhIjKlMnOpQrStUvWxYz678901', 
+                    name: 'PROTOCOLO PQ', 
+                    type: 'pdf', 
+                    size: '4.1 MB', 
+                    date: '01/08/2023' 
+                },
+                { 
+                    id: '7gHiJkLmNoPqRsTuVwXyZ789012', 
+                    name: 'PRUEBAS DE RENDIMIENTO PQ', 
+                    type: 'pdf', 
+                    size: '3.9 MB', 
+                    date: '03/08/2023' 
+                },
+                { 
+                    id: '8hIjKlMnOpQrStUvWxYz890123', 
+                    name: 'ANEXO 1 PQ', 
+                    type: 'pdf', 
+                    size: '2.6 MB', 
+                    date: '05/08/2023' 
+                },
+                { 
+                    id: '9iJkLmNoPqRsTuVwXyZ901234', 
+                    name: 'ANEXO 2 PQ', 
+                    type: 'pdf', 
+                    size: '3.3 MB', 
+                    date: '08/08/2023' 
+                },
+                { 
+                    id: '10jKlMnOpQrStUvWxYz012345', 
+                    name: 'INFORME FINAL PQ', 
+                    type: 'pdf', 
+                    size: '5.1 MB', 
+                    date: '10/08/2023' 
+                }
+            ]
         };
         
         // Referencias DOM
@@ -466,6 +611,11 @@
         // Manejar clic en categorías
         categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
+                // Remover clase activa de todos los botones
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Agregar clase activa al botón seleccionado
+                button.classList.add('active');
+                
                 const category = button.getAttribute('data-category');
                 loadDocuments(category);
                 
@@ -505,7 +655,7 @@
                     `;
                 });
             } else {
-                html = '<p>No se encontraron documentos en esta categoría.</p>';
+                html = '<div class="empty-state"><i class="fas fa-file-exclamation"></i><p>No se encontraron documentos en esta categoría.</p></div>';
             }
             
             documentsGrid.innerHTML = html;
@@ -575,9 +725,13 @@
             }
         });
         
-        // Inicializar con DQ
-        loadDocuments('dq');
-        currentCategory.textContent = 'Documentos de DQ';
+        // Inicializar con IQ
+        window.onload = function() {
+            loadDocuments('iq');
+            currentCategory.textContent = 'Documentos de IQ';
+            // Activar el botón IQ por defecto
+            document.querySelector('.category-btn[data-category="iq"]').classList.add('active');
+        };
     </script>
 </body>
 </html>
