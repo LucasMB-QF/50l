@@ -132,7 +132,7 @@
             z-index: 1;
         }
         
-        .btn-iq {
+        .btn-dq {
             background: linear-gradient(135deg, rgba(106, 27, 154, 0.7), rgba(49, 27, 146, 0.7));
         }
         
@@ -424,7 +424,7 @@
         </header>
         
         <div class="categories">
-            <div class="category-btn btn-iq" data-category="dq">
+            <div class="category-btn btn-dq" data-category="dq">
                 <i class="fas fa-file-alt"></i>
                 <h2>DQ</h2>
                 <p>Calificación de diseño</p>
@@ -725,12 +725,12 @@
             }
         });
         
-        // Inicializar con IQ
+        // Inicializar con DQ
         window.onload = function() {
-            loadDocuments('iq');
-            currentCategory.textContent = 'Documentos de IQ';
-            // Activar el botón IQ por defecto
-            document.querySelector('.category-btn[data-category="iq"]').classList.add('active');
+            loadDocuments('dq');
+            currentCategory.textContent = 'Documentos de DQ';
+            // Activar el botón DQ por defecto
+            document.querySelector('.category-btn[data-category="dq"]').classList.add('active');
         };
     </script>
 </body>
