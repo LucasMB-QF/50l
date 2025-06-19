@@ -1,668 +1,247 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calificacion verano cintenedor isotérmico pasivo 50L DQ/OQ/PQ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentos</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
-            color: #fff;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        #btn-group button {
+            margin: 0 5px 15px 0;
+            padding: 10px 15px;
+            cursor: pointer;
         }
-        
-        header {
-            text-align: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            position: relative;
+        #btn-group button.active {
+            background-color: #007BFF;
+            color: white;
         }
-        
-        .logo-container {
-            background: rgba(255, 255, 255, 0.1);
-            height: 120px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            max-width: 500px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            overflow: hidden;
-        }
-        
-        .logo-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            color: #a0d2ff;
-            font-size: 1.2rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 30px;
         }
-        
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
         }
-        
-        .category-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 25px 40px;
-            min-width: 200px;
-            text-align: center;
+        th {
+            background-color: #f2f2f2;
+        }
+        button.action-btn {
+            margin-right: 10px;
+            padding: 5px 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
         }
-        
-        .category-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .category-btn:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .category-btn:hover::before {
-            opacity: 1;
-        }
-        
-        .category-btn i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .category-btn h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .category-btn p {
-            color: #c0e0ff;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .btn-dq {
-            background: linear-gradient(135deg, rgba(106, 27, 154, 0.7), rgba(49, 27, 146, 0.7));
-        }
-        
-        .btn-oq {
-            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7), rgba(0, 77, 64, 0.7));
-        }
-        
-        .btn-pq {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.7), rgba(183, 28, 28, 0.7));
-        }
-        
-        .documents-container {
-            background: rgba(16, 22, 58, 0.7);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(100, 181, 246, 0.5);
-        }
-        
-        .section-title i {
-            font-size: 28px;
-            margin-right: 15px;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            font-weight: 600;
-        }
-        
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .document-card {
-            background: rgba(30, 40, 100, 0.6);
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(100, 181, 246, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .document-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(30, 40, 100, 0.8));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .document-card:hover {
-            transform: translateY(-5px);
-            background: rgba(40, 60, 150, 0.7);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border-color: rgba(100, 181, 246, 0.4);
-        }
-        
-        .document-card:hover::before {
-            opacity: 1;
-        }
-        
-        .document-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #64b5f6;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .document-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .document-meta {
-            display: flex;
-            justify-content: space-between;
-            color: #90caf9;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .document-actions {
-            display: flex;
-            gap: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .btn {
-            padding: 8px 15px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-        }
-        
-        .btn-view {
-            background: linear-gradient(to right, #00c853, #009624);
-            color: white;
-            flex: 1;
-        }
-        
-        .btn-download {
-            background: linear-gradient(to right, #2979ff, #01579b);
-            color: white;
-            flex: 1;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .viewer-container {
+        #pdf-viewer-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
         }
-        
-        .viewer-container.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .viewer-header {
-            padding: 15px 20px;
-            background: rgba(30, 30, 30, 0.95);
+        #pdf-viewer-container.active {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-        
-        .viewer-title {
-            font-size: 1.2rem;
-            color: #64b5f6;
-        }
-        
-        .close-viewer {
-            background: #f44336;
-            color: white;
+        #pdf-viewer {
+            width: 80vw;
+            height: 80vh;
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            background: white;
+        }
+        #viewer-title {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        #close-pdf {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            background: #ff4c4c;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 5px 10px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-        
-        .close-viewer:hover {
-            transform: rotate(90deg);
-            background: #d32f2f;
-        }
-        
-        .viewer-content {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .pdf-viewer {
-            width: 90%;
-            height: 90%;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 100, 255, 0.3);
-        }
-        
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(40, 167, 69, 0.9);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #90a4ae;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: #90caf9;
-            font-size: 1.1rem;
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            opacity: 0.6;
-        }
-        
-        @media (max-width: 768px) {
-            .categories {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .category-btn {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <img src="https://transfarma.cl/wp-content/uploads/2024/06/logo-transfarma-vec.png" alt="Logo de la Empresa">
-            </div>
-            <h1>Calificación verano contenedor isotérmico pasivo 50L</h1>
-            <p class="subtitle">Gestión documental DQ/OQ/PQ - Visualización y descarga de archivos</p>
-        </header>
-        
-        <div class="categories">
-            <div class="category-btn btn-dq" data-category="dq">
-                <i class="fas fa-file-alt"></i>
-                <h2>DQ</h2>
-                <p>Calificación de diseño</p>
-            </div>
-            <div class="category-btn btn-oq" data-category="oq">
-                <i class="fas fa-cogs"></i>
-                <h2>OQ</h2>
-                <p>Calificación de Operación</p>
-            </div>
-            <div class="category-btn btn-pq" data-category="pq">
-                <i class="fas fa-chart-line"></i>
-                <h2>PQ</h2>
-                <p>Calificación de desempeño</p>
-            </div>
-        </div>
-        
-        <div class="documents-container">
-            <div class="section-title">
-                <i class="fas fa-folder-open"></i>
-                <h2 id="current-category">Seleccione una categoría</h2>
-            </div>
-            <div class="documents-grid" id="documents-grid">
-                <div class="empty-state">
-                    <i class="fas fa-folder-open"></i>
-                    <p>Seleccione una categoría para ver los documentos disponibles</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>Sistema de Gestión Documental &copy; 2025 | Lucas Miralles Bahamonde</p>
+
+    <div id="btn-group">
+        <button id="btn-dq" class="active">DQ</button>
+        <button id="btn-oq">OQ</button>
+        <button id="btn-pq">PQ</button>
+    </div>
+
+    <div id="documents-container"></div>
+
+    <div id="pdf-viewer-container">
+        <button id="close-pdf">Cerrar ✕</button>
+        <div>
+            <div id="viewer-title"></div>
+            <iframe id="pdf-viewer" src=""></iframe>
         </div>
     </div>
-    
-    <div class="viewer-container" id="pdf-viewer-container">
-        <div class="viewer-header">
-            <div class="viewer-title" id="viewer-title">Documento.pdf</div>
-            <button class="close-viewer" id="close-viewer">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="viewer-content">
-            <iframe class="pdf-viewer" id="pdf-viewer" src=""></iframe>
-        </div>
-    </div>
-    
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i> Descarga iniciada
-    </div>
-    
+
     <script>
-const documents = {
-  // ==================== DQ ====================
-  dq: [
-    { id: '1RxjMR-8Nfxw7uqmH5LIpjtMPAOKdHIBg', name: 'INFORME FINAL DQ', type: 'pdf', size: '4.2 MB', date: '' },
-    { id: '1dwxsjsuGGsjIbUq1jlkM_qXCvX5Z0s0d', name: 'PROTOCOLO DQ', type: 'pdf', size: '3.5 MB', date: '' },
-    { id: '1p4VECW2GPcNptowOLl0b3qMLnd96Jlt8', name: 'ANEXO 1 DQ', type: 'pdf', size: '5.9 MB', date: '' },
-    { id: '13NUOWSTyeVxRZElRwzf2-nqeO1P7pWsN', name: 'ANEXO 2 DQ', type: 'pdf', size: '3.5 MB', date: '' },
-    { id: '1ygQqx--Du4qGjAIFh05o_pUHqxaGn2Ha', name: 'ANEXO 3 DQ', type: 'pdf', size: '1.8 MB', date: '' },
-    { id: '1y7CR-jPHhUvUbInM3EEQ0IaRI0x8Z_nN', name: 'ANEXO 4 DQ', type: 'pdf', size: '2.7 MB', date: '' },
-    { id: '1JRsSZrrUtBBp5oO9p0u60ymodhf0xIub', name: 'ANEXO DESV DQ', type: 'pdf', size: '1.2 MB', date: '' }
-  ],
+        const documents = {
+          dq: [
+            { id: '1RxjMR-8Nfxw7uqmH5LIpjtMPAOKdHIBg', name: 'INFORME FINAL DQ', type: 'pdf', size: '4.2 MB' },
+            { id: '1dwxsjsuGGsjIbUq1jlkM_qXCvX5Z0s0d', name: 'PROTOCOLO DQ', type: 'pdf', size: '3.5 MB' },
+            { id: '1p4VECW2GPcNptowOLl0b3qMLnd96Jlt8', name: 'ANEXO 1 DQ', type: 'pdf', size: '5.9 MB' },
+            { id: '13NUOWSTyeVxRZElRwzf2-nqeO1P7pWsN', name: 'ANEXO 2 DQ', type: 'pdf', size: '3.5 MB' },
+            { id: '1ygQqx--Du4qGjAIFh05o_pUHqxaGn2Ha', name: 'ANEXO 3 DQ', type: 'pdf', size: '1.8 MB' },
+            { id: '1y7CR-jPHhUvUbInM3EEQ0IaRI0x8Z_nN', name: 'ANEXO 4 DQ', type: 'pdf', size: '2.7 MB' },
+            { id: '1JRsSZrrUtBBp5oO9p0u60ymodhf0xIub', name: 'ANEXO DESV DQ', type: 'pdf', size: '1.2 MB' }
+          ],
+          oq: [
+            { id: '1bMoPGZVSzepAlix49vOZ-QaVh5t9g9DQ', name: 'INFORME FINAL OQ', type: 'pdf', size: '1.2 MB' },
+            { id: '1tAcbsZXcR7tZT4drMDnOQukyTU_ad0Il', name: 'PROTOCOLO OQ', type: 'pdf', size: '4 MB' },
+            { id: '1j4YQ8ppIvOaaWsBeqL9ZxvWOqiKFN5vG', name: 'ANEXO 1 OQ', type: 'pdf', size: '678 KB' },
+            { id: '1WeX4RzxEqCKlNTpOZiFZUUsdTT4BAfof', name: 'ANEXO 2 OQ', type: 'pdf', size: '3.6 MB' },
+            { id: '12LZhk-oUOxJyDBAfte8xaJ1FbRxtq9Z7', name: 'ANEXO 3 OQ', type: 'pdf', size: '1.7 MB' },
+            { id: '1olFmbEW6zk1dss4hZ0u9ONhLjQXdDFbo', name: 'ANEXO 4 OQ', type: 'pdf', size: '1.7 MB' },
+            { id: '11jKp3C_K6hkfCZhhi1q7VOWJBuM0Ie6K', name: 'ANEXO 5 OQ', type: 'pdf', size: '1.7 MB' },
+            { id: '1kfRsBhlJfr0BnmiLk07XsOF6U7Tyhs-a', name: 'ANEXO 6 OQ', type: 'pdf', size: '1.7 MB' },
+            { id: '16qVc_5gIkMYaZKoKD3Gf7bNkozq2VqKK', name: 'ANEXO 7 OQ', type: 'pdf', size: '906 KB' },
+            { id: '13I1Z-3alFLXdumlR0avyOHOYpeOnzev5', name: 'MKT Perfil cálido, carga mínima.xlsm', type: 'xlsm', size: '409 KB', previewLink: 'https://docs.google.com/spreadsheets/d/13I1Z-3alFLXdumlR0avyOHOYpeOnzev5/preview' },
+            { id: '1qfXCTEoWDT6epDk7pp0-jcd7o6MXvNLN', name: 'MKT Perfil frío, carga mínima.xlsm', type: 'xlsm', size: '367 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1qfXCTEoWDT6epDk7pp0-jcd7o6MXvNLN/preview' },
+            { id: '1AIcshtEYsCsu82c14G8Fj3l0OincBXwY', name: 'MKT Perfil cálido, carga máxima.xlsm', type: 'xlsm', size: '373 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1AIcshtEYsCsu82c14G8Fj3l0OincBXwY/preview' },
+            { id: '1t54Lgy-xSwkgiDTczDOWHjDFUWkoeMfy', name: 'MKT Perfil frío, carga máxima.xlsm', type: 'xlsm', size: '355 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1t54Lgy-xSwkgiDTczDOWHjDFUWkoeMfy/preview' }
+          ],
+          pq: [
+            { id: '1bz2QpJTfAIpM97vCCElxE_KK-1OAN5U4', name: 'INFORME FINAL PQ', type: 'pdf', size: '1 MB' },
+            { id: '15XHbUBAqgQlVN8-hYzmjdwQ4hSBF9stM', name: 'PROTOCOLO PQ', type: 'pdf', size: '6.6 MB' },
+            { id: '1IzDv5t2MIViA5z-4aqPdmpX2FoqyfWXh', name: 'ANEXO 1 PQ', type: 'pdf', size: '3.5 MB' },
+            { id: '1uvNac5Eo7XzZjr0i9A-dHmt6yHa7dNc9', name: 'ANEXO 2 PQ', type: 'pdf', size: '1.9 MB' },
+            { id: '1zIFG6D9d-oCp8VrBbWAaBbk9_kOUM5Y3', name: 'ANEXO 3 PQ', type: 'pdf', size: '1.6 MB' },
+            { id: '1aNoo63ri9yprcLNiL3GC6HYsJoRwYADj', name: 'ANEXO 4 PQ', type: 'pdf', size: '2 MB' },
+            { id: '1JqoyGOmwSem_fihJvhz6TSjJhsNqSOJV', name: 'ANEXO 5 PQ', type: 'pdf', size: '1.7 MB' },
+            { id: '1NRQbVUp0qAoiSLHzLfeyCq1mt3Ikc5LH', name: 'ANEXO 6 PQ', type: 'pdf', size: '1.6 MB' },
+            { id: '1rqchegSKzcdyYhKQUf90U3GWy0cwu-6b', name: 'ANEXO 7 PQ', type: 'pdf', size: '2.5 MB' },
+            { id: '1BimC7kg1PPyCeIVKALu2ikn3S1hYMFp4', name: 'ANEXO DESV PQ', type: 'pdf', size: '432 KB' },
+            { id: '13I1Z-3alFLXdumlR0avyOHOYpeOnzev5', name: 'MKT CPO, carga mínima.xlsm', type: 'xlsm', size: '409 KB', previewLink: 'https://docs.google.com/spreadsheets/d/13I1Z-3alFLXdumlR0avyOHOYpeOnzev5/preview' },
+            { id: '1rDR45SvGwjZ8LXmlRp8_NTBthNcdmamV', name: 'MKT PMC, carga mínima.xlsm', type: 'xlsm', size: '332 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1rDR45SvGwjZ8LXmlRp8_NTBthNcdmamV/preview' },
+            { id: '1KlqnGHL_zq7IvaOlr-JvBnQQbAr5ujwt', name: 'MKT CPO, carga máxima.xlsm', type: 'xlsm', size: '397 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1KlqnGHL_zq7IvaOlr-JvBnQQbAr5ujwt/preview' },
+            { id: '1ygNzzjI6xEmazGKCj8no7j61zFaXQEo8', type: 'xlsm', name: 'MKT PMC, carga máxima.xlsm', size: '373 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1ygNzzjI6xEmazGKCj8no7j61zFaXQEo8/preview' },
+            { id: '17vVo7eaF9XXU2gHC9iVAjqGXG_Mv3vlL', name: 'DESV MKT PMC, carga mínima.xlsm', type: 'xlsm', size: '441 KB', previewLink: 'https://docs.google.com/spreadsheets/d/17vVo7eaF9XXU2gHC9iVAjqGXG_Mv3vlL/preview' }
+          ]
+        };
 
-  // ==================== OQ ====================
-  oq: [
-    { id: '1bMoPGZVSzepAlix49vOZ-QaVh5t9g9DQ', name: 'INFORME FINAL OQ', type: 'pdf', size: '1.2 MB', date: '' },
-    { id: '1tAcbsZXcR7tZT4drMDnOQukyTU_ad0Il', name: 'PROTOCOLO OQ', type: 'pdf', size: '4 MB', date: '' },
-    { id: '1j4YQ8ppIvOaaWsBeqL9ZxvWOqiKFN5vG', name: 'ANEXO 1 OQ', type: 'pdf', size: '678 KB', date: '' },
-    { id: '1WeX4RzxEqCKlNTpOZiFZUUsdTT4BAfof', name: 'ANEXO 2 OQ', type: 'pdf', size: '3.6 MB', date: '' },
-    { id: '12LZhk-oUOxJyDBAfte8xaJ1FbRxtq9Z7', name: 'ANEXO 3 OQ', type: 'pdf', size: '1.7 MB', date: '' },
-    { id: '1olFmbEW6zk1dss4hZ0u9ONhLjQXdDFbo', name: 'ANEXO 4 OQ', type: 'pdf', size: '1.7 MB', date: '' },
-    { id: '11jKp3C_K6hkfCZhhi1q7VOWJBuM0Ie6K', name: 'ANEXO 5 OQ', type: 'pdf', size: '1.7 MB', date: '' },
-    { id: '1kfRsBhlJfr0BnmiLk07XsOF6U7Tyhs-a', name: 'ANEXO 6 OQ', type: 'pdf', size: '1.7 MB', date: '' },
-    { id: '16qVc_5gIkMYaZKoKD3Gf7bNkozq2VqKK', name: 'ANEXO 7 OQ', type: 'pdf', size: '906 KB', date: '' },
-    { id: '13I1Z-3alFLXdumlR0avyOHOYpeOnzev5', name: 'MKT Perfil cálido, carga mínima.xlsm', type: 'xlsm', size: '409 KB', previewLink: 'https://docs.google.com/spreadsheets/d/13I1Z-3alFLXdumlR0avyOHOYpeOnzev5/preview', date: '' },
-    { id: '1qfXCTEoWDT6epDk7pp0-jcd7o6MXvNLN', name: 'MKT Perfil frío, carga mínima.xlsm', type: 'xlsm', size: '367 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1qfXCTEoWDT6epDk7pp0-jcd7o6MXvNLN/preview', date: '' },
-    { id: '1AIcshtEYsCsu82c14G8Fj3l0OincBXwY', name: 'MKT Perfil cálido, carga máxima.xlsm', type: 'xlsm', size: '373 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1AIcshtEYsCsu82c14G8Fj3l0OincBXwY/preview', date: '' },
-    { id: '1t54Lgy-xSwkgiDTczDOWHjDFUWkoeMfy', name: 'MKT Perfil frío, carga máxima.xlsm', type: 'xlsm', size: '355 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1t54Lgy-xSwkgiDTczDOWHjDFUWkoeMfy/preview', date: '' }
-  ],
-
-  // ==================== PQ ====================
-  pq: [
-    { id: '1bz2QpJTfAIpM97vCCElxE_KK-1OAN5U4', name: 'INFORME FINAL PQ', type: 'pdf', size: '1 MB', date: '' },
-    { id: '15XHbUBAqgQlVN8-hYzmjdwQ4hSBF9stM', name: 'PROTOCOLO PQ', type: 'pdf', size: '6.6 MB', date: '' },
-    { id: '1IzDv5t2MIViA5z-4aqPdmpX2FoqyfWXh', name: 'ANEXO 1 PQ', type: 'pdf', size: '3.5 MB', date: '' },
-    { id: '1uvNac5Eo7XzZjr0i9A-dHmt6yHa7dNc9', name: 'ANEXO 2 PQ', type: 'pdf', size: '1.9 MB', date: '' },
-    { id: '1zIFG6D9d-oCp8VrBbWAaBbk9_kOUM5Y3', name: 'ANEXO 3 PQ', type: 'pdf', size: '1.6 MB', date: '' },
-    { id: '1aNoo63ri9yprcLNiL3GC6HYsJoRwYADj', name: 'ANEXO 4 PQ', type: 'pdf', size: '2 MB', date: '' },
-    { id: '1JqoyGOmwSem_fihJvhz6TSjJhsNqSOJV', name: 'ANEXO 5 PQ', type: 'pdf', size: '1.7 MB', date: '' },
-    { id: '1NRQbVUp0qAoiSLHzLfeyCq1mt3Ikc5LH', name: 'ANEXO 6 PQ', type: 'pdf', size: '1.6 MB', date: '' },
-    { id: '1rqchegSKzcdyYhKQUf90U3GWy0cwu-6b', name: 'ANEXO 7 PQ', type: 'pdf', size: '2.5 MB', date: '' },
-    { id: '1BimC7kg1PPyCeIVKALu2ikn3S1hYMFp4', name: 'ANEXO DESV PQ', type: 'pdf', size: '432 KB', date: '' },
-    { id: '13I1Z-3alFLXdumlR0avyOHOYpeOnzev5', name: 'MKT CPO, carga mínima.xlsm', type: 'xlsm', size: '409 KB', previewLink: 'https://docs.google.com/spreadsheets/d/13I1Z-3alFLXdumlR0avyOHOYpeOnzev5/preview', date: '' },
-    { id: '1rDR45SvGwjZ8LXmlRp8_NTBthNcdmamV', name: 'MKT PMC, carga mínima.xlsm', type: 'xlsm', size: '332 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1rDR45SvGwjZ8LXmlRp8_NTBthNcdmamV/preview', date: '' },
-    { id: '1KlqnGHL_zq7IvaOlr-JvBnQQbAr5ujwt', name: 'MKT CPO, carga máxima.xlsm', type: 'xlsm', size: '397 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1KlqnGHL_zq7IvaOlr-JvBnQQbAr5ujwt/preview', date: '' },
-    { id: '1ygNzzjI6xEmazGKCj8no7j61zFaXQEo8', name: 'MKT PMC, carga máxima.xlsm', type: 'xlsm', size: '373 KB', previewLink: 'https://docs.google.com/spreadsheets/d/1ygNzzjI6xEmazGKCj8no7j61zFaXQEo8/preview', date: '' },
-    { id: '17vVo7eaF9XXU2gHC9iVAjqGXG_Mv3vlL', name: 'DESV MKT PMC, carga mínima.xlsm', type: 'xlsm', size: '441 KB', previewLink: 'https://docs.google.com/spreadsheets/d/17vVo7eaF9XXU2gHC9iVAjqGXG_Mv3vlL/preview', date: '' }
-  ]
-};
-// Función para abrir documentos (opcional)
-function openDocument(doc) {
-  const url = doc.previewLink || `https://drive.google.com/file/d/${doc.id}/preview`;
-  window.open(url, '_blank');
-}
-        // Referencias DOM
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const currentCategory = document.getElementById('current-category');
-        const documentsGrid = document.getElementById('documents-grid');
+        const btnDq = document.getElementById('btn-dq');
+        const btnOq = document.getElementById('btn-oq');
+        const btnPq = document.getElementById('btn-pq');
+        const documentsContainer = document.getElementById('documents-container');
         const pdfViewerContainer = document.getElementById('pdf-viewer-container');
         const pdfViewer = document.getElementById('pdf-viewer');
-        const closeViewer = document.getElementById('close-viewer');
         const viewerTitle = document.getElementById('viewer-title');
-        const notification = document.getElementById('notification');
-        
-        // Manejar clic en categorías
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remover clase activa de todos los botones
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                // Agregar clase activa al botón seleccionado
-                button.classList.add('active');
-                
-                const category = button.getAttribute('data-category');
-                loadDocuments(category);
-                
-                // Actualizar título de categoría
-                const categoryName = button.querySelector('h2').textContent;
-                currentCategory.textContent = `Documentos de ${categoryName}`;
-            });
-        });
-        
-        // Cargar documentos de una categoría
-        function loadDocuments(category) {
+        const closePdfBtn = document.getElementById('close-pdf');
+
+        let currentCategory = 'dq';
+
+        function renderDocuments(category) {
+            documentsContainer.innerHTML = '';
             const docs = documents[category];
-            let html = '';
-            
-            if (docs && docs.length > 0) {
-                docs.forEach(doc => {
-                    const icon = getIconForType(doc.type);
-                    
-                    html += `
-                    <div class="document-card">
-                        <div class="document-icon">${icon}</div>
-                        <h3 class="document-title">${doc.name}</h3>
-                        <div class="document-meta">
-                            <span>${doc.type.toUpperCase()}</span>
-                            <span>${doc.size}</span>
-                            <span>${doc.date}</span>
-                        </div>
-                        <div class="document-actions">
-                            <button class="btn btn-view" onclick="viewDocument('${doc.id}', '${doc.name}', '${doc.type}')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="btn btn-download" onclick="downloadDocument('${doc.id}', '${doc.name}')">
-                                <i class="fas fa-download"></i> Descargar
-                            </button>
-                        </div>
-                    </div>
-                    `;
-                });
-            } else {
-                html = '<div class="empty-state"><i class="fas fa-file-exclamation"></i><p>No se encontraron documentos en esta categoría.</p></div>';
+            if (!docs || docs.length === 0) {
+                documentsContainer.innerHTML = '<p>No hay documentos para mostrar.</p>';
+                return;
             }
-            
-            documentsGrid.innerHTML = html;
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            thead.innerHTML = `<tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Tamaño</th>
+                <th>Acciones</th>
+            </tr>`;
+            table.appendChild(thead);
+            const tbody = document.createElement('tbody');
+
+            docs.forEach(doc => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${doc.name}</td>
+                    <td>${doc.type.toUpperCase()}</td>
+                    <td>${doc.size}</td>
+                    <td>
+                        ${doc.type === 'pdf' ? `<button class="action-btn" onclick="viewDocument('${doc.id}', '${doc.name}', '${doc.type}')">Ver</button>` : ''}
+                        ${doc.type === 'xlsm' && doc.previewLink ? `<button class="action-btn" onclick="openDocumentPreview('${doc.previewLink}')">Abrir</button>` : ''}
+                        <button class="action-btn" onclick="downloadDocument('${doc.id}', '${doc.name}')">Descargar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            documentsContainer.appendChild(table);
         }
-        
-        // Obtener icono según tipo de documento
-        function getIconForType(type) {
-            const icons = {
-                'pdf': '<i class="far fa-file-pdf"></i>',
-                'docx': '<i class="far fa-file-word"></i>',
-                'xlsx': '<i class="far fa-file-excel"></i>',
-                'pptx': '<i class="far fa-file-powerpoint"></i>'
-            };
-            
-            return icons[type] || '<i class="far fa-file"></i>';
-        }
-        
-        // Visualizar documento
+
         function viewDocument(id, name, type) {
             if (type === 'pdf') {
-                // URL de vista previa de Google Drive para PDFs
                 const url = `https://drive.google.com/file/d/${id}/preview`;
                 pdfViewer.src = url;
                 viewerTitle.textContent = name;
                 pdfViewerContainer.classList.add('active');
             } else {
-                alert('La vista previa solo está disponible para documentos PDF. Por favor descargue el archivo para verlo.');
+                alert('Vista previa solo disponible para PDFs. Por favor descargue el archivo.');
             }
         }
-        
-        // Descargar documento
+
+        function openDocumentPreview(previewLink) {
+            window.open(previewLink, '_blank');
+        }
+
         function downloadDocument(id, name) {
-            // URL de descarga directa de Google Drive
-            const downloadUrl = `https://drive.google.com/uc?export=download&id=${id}`;
-            
-            // Crear enlace temporal para descarga
+            const url = `https://drive.google.com/uc?export=download&id=${id}`;
             const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.setAttribute('download', name);
+            link.href = url;
+            link.download = name;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
-            // Mostrar notificación
-            showNotification();
         }
-        
-        // Mostrar notificación de descarga
-        function showNotification() {
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Cerrar visor PDF
-        closeViewer.addEventListener('click', () => {
+
+        closePdfBtn.addEventListener('click', () => {
             pdfViewerContainer.classList.remove('active');
             pdfViewer.src = '';
         });
-        
-        // Cerrar visor al hacer clic fuera del contenido
-        pdfViewerContainer.addEventListener('click', (e) => {
-            if (e.target === pdfViewerContainer) {
-                pdfViewerContainer.classList.remove('active');
-                pdfViewer.src = '';
-            }
+
+        function setActiveButton(activeBtn) {
+            [btnDq, btnOq, btnPq].forEach(btn => btn.classList.remove('active'));
+            activeBtn.classList.add('active');
+        }
+
+        btnDq.addEventListener('click', () => {
+            currentCategory = 'dq';
+            setActiveButton(btnDq);
+            renderDocuments('dq');
         });
-        
-        // Inicializar con DQ
-        window.onload = function() {
-            loadDocuments('dq');
-            currentCategory.textContent = 'Documentos de DQ';
-            // Activar el botón DQ por defecto
-            document.querySelector('.category-btn[data-category="dq"]').classList.add('active');
-        };
+
+        btnOq.addEventListener('click', () => {
+            currentCategory = 'oq';
+            setActiveButton(btnOq);
+            renderDocuments('oq');
+        });
+
+        btnPq.addEventListener('click', () => {
+            currentCategory = 'pq';
+            setActiveButton(btnPq);
+            renderDocuments('pq');
+        });
+
+        // Render initial documents
+        renderDocuments(currentCategory);
     </script>
+
 </body>
 </html>
